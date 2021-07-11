@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.moviePoster {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.moviePoster .poster {
+  display: inline-block;
+  width: calc(50% - 1em);
+  max-width: 300px;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+.moviePoster .movieInfo {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.moviePoster h2 {
+  margin-top: 0;
+}
+
+.moviePoster .poster img {
+  width: 100%;
+}
+
+.moviePoster .rating {
+  float: right;
+  margin: 0 0 0 1em;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: blue;
+}
+
+.moviePoster span {
+  background: lightgray;
+  border-radius: 4px;
+  margin-right: 1em;
+  white-space: nowrap;
+  padding: 5px;
+}
