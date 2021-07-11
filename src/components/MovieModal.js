@@ -1,11 +1,9 @@
 import React from 'react';
 
-const MovieModal = ({show, onClose, children }) => {
-
-  const showHideClassName = show ? "modal display-block" : "modal display-none";               
+const MovieModal = ({show, onClose, children }) => {           
 
   return(
-    <div className={showHideClassName}>
+    <div>
       <section className="modal-main">
         {children}
         <button onClick={onClose}>close</button>

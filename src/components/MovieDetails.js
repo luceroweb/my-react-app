@@ -2,21 +2,22 @@ import React from 'react';
 
 // Class based components
 const MovieDetails = ({ movie }) => {
-  const {
-    Title,
-    Type,
-    Year,
-  } = movie;
   
   return (
-    <div className="moviePoster">
-      <div className="movieInfo">
-        <h2>Details</h2>
-        <p>{Title}</p>
-        <p>{Type}</p>
-        <p>{Year}</p>}
-      </div>
-    </div>
+    <>
+      {movie &&
+        <div className="moviePoster">
+          <div className="movieInfo">
+            <h2>Details</h2>
+            <img src={movie.Poster} alt={`${movie.Title} poster`} />
+            <p>{movie.Title}</p>
+            <p>{movie.Type}</p>
+            <p>{movie.Year}</p>
+            <p>{movie.imdbID}</p>
+          </div>
+        </div>
+      }
+    </>
   )
 }
 
