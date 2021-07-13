@@ -3,17 +3,17 @@ import React from 'react';
 const MovieModal = ({show, onClose, children }) => {           
 
   return(
-    <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style={{display: 'block'}}>
-      <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content p-0">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={onClose}></button>
+    <div className="modal fade show" id="exampleModal" tabIndex="-1" style={{display: 'block'}}>
+      <div className="modal-dialog modal-lg modal-dialog-scrollable">
+        <div className="modal-content p-0">
+          <div className="modal-header">
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={onClose}></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
           {children}
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Close</button>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Close</button>
           </div>
         </div>
       </div>
