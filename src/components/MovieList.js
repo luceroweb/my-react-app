@@ -9,13 +9,13 @@ export const MovieList = () => {
   const [ movieDetails, setMovieDetails ] = useState([]);
   const movieService = new MovieService();
 
-  async function getMoviesByTitle(title) {
+  async function callMovieServiceByTitle(title) {
     const movies = await movieService.getMoviesByTitle(title);
     setMovies(movies.Search);
   }
 
   useEffect(() => {
-    getMoviesByTitle('dune');
+    callMovieServiceByTitle('harry potter');
   }, []);
 
   async function getMovieById(id) {
@@ -31,33 +31,40 @@ export const MovieList = () => {
 
   const renderMovieList = () => (
     movies.map((movie, index) => (
-      <div className="movie-card" key={index}>
-        <img src={movie.Poster} alt={`${movie.Title} poster`} />
-        <div>
-          <h5>{ movie.Title }</h5>
-          <button onClick={() => showMovie(movie.imdbID,index)}>
-            { index === show ? "Hide Movie" : "Show Movie" }
-          </button>
+      <>
+        <div class="col-lg-3 col-md-4 col-6" key={index}>
+          <div class="d-block mb-4 h-100" onClick={() => showMovie(movie.imdbID,index)}>
+            <img src={movie.Poster} alt={`${movie.Title} poster`} style={{maxWidth:'100%'}} />
+            <div>
+              <p>{ movie.Title }</p>
+              <button onClick={() => showMovie(movie.imdbID,index)}>
+                { index === show ? "Hide Movie" : "Show Movie" }
+              </button>
+            </div>
+          </div>
+          { show === index && 
+            <MovieModal 
+              onClose={setShow} 
+              show={show} 
+              children={
+                <MovieDetails 
+                  movie={movieDetails} 
+                />
+              } 
+            />
+          }
         </div>
-        { show === index && 
-          <MovieModal 
-            onClose={setShow} 
-            show={show} 
-            children={
-              <MovieDetails 
-                movie={movie} 
-              />
-            } 
-          />
-        }
-      </div>
+      </>
     ))
   );
     // https://omdbapi.com/?s=star%20wars&apikey=19c7ac68
 
   return(
-    <div className="movie-list-container">
-      { movies && renderMovieList() }
+    <div className="container">
+      <h1 class="font-weight-light text-lg-left mt-4 mb-0">Movie List</h1>
+      <div class="row text-lg-left">
+        { movies && renderMovieList() }
+      </div>
     </div>
   )
 }
