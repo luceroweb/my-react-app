@@ -24,6 +24,7 @@ export const MovieList = () => {
   }
 
   const showMovie = (id,index) => {
+    setMovieDetails([]);
     getMovieById(id);
     if(index === show) return setShow(null);
     setShow(index);
@@ -31,38 +32,36 @@ export const MovieList = () => {
 
   const renderMovieList = () => (
     movies.map((movie, index) => (
-      <>
-        <div class="col-lg-3 col-md-4 col-6" key={index}>
-          <div class="d-block mb-4 h-100" onClick={() => showMovie(movie.imdbID,index)}>
-            <img src={movie.Poster} alt={`${movie.Title} poster`} style={{maxWidth:'100%'}} />
-            <div>
-              <p>{ movie.Title }</p>
-              <button onClick={() => showMovie(movie.imdbID,index)}>
-                { index === show ? "Hide Movie" : "Show Movie" }
-              </button>
-            </div>
+      <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+        <div className="d-block mb-4 h-100 text-center text-md-start" onClick={() => showMovie(movie.imdbID,index)}>
+          <img src={movie.Poster} alt={`${movie.Title} poster`} style={{maxWidth:'100%'}} />
+          <div>
+            <p>{ movie.Title }</p>
+            <button onClick={() => showMovie(movie.imdbID,index)}>
+              { index === show ? "Hide Movie" : "Show Movie" }
+            </button>
           </div>
-          { show === index && 
-            <MovieModal 
-              onClose={setShow} 
-              show={show} 
-              children={
-                <MovieDetails 
-                  movie={movieDetails} 
-                />
-              } 
-            />
-          }
         </div>
-      </>
+        { show === index && 
+          <MovieModal 
+            onClose={setShow} 
+            show={show} 
+            children={
+              <MovieDetails 
+                movie={movieDetails} 
+              />
+            } 
+          />
+        }
+      </div>
     ))
   );
     // https://omdbapi.com/?s=star%20wars&apikey=19c7ac68
 
   return(
     <div className="container">
-      <h1 class="font-weight-light text-lg-left mt-4 mb-0">Movie List</h1>
-      <div class="row text-lg-left">
+      <h1 className="font-weight-light mt-4 mb-0">Movie List</h1>
+      <div className="row align-items-center">
         { movies && renderMovieList() }
       </div>
     </div>

@@ -2,9 +2,6 @@ import React from 'react';
 
 // Class based components
 const MovieDetails = ({ movie }) => {
-
-  console.log(movie);
-  
   return (
     <>
       {movie &&
