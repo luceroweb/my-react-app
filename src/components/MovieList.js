@@ -1,54 +1,45 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import MovieDetails from './MovieDetails';
 import MovieModal from './MovieModal';
+// import MovieService from '../services/Movie.Service';
 import MovieService from '../services/Movie.Service';
+import { Parent } from './Parent';
 
 export const MovieList = () => {
-  const [ movies, setMovies ] = useState([]);
-  const [show, setShow] = useState();
-  const [ movieDetails, setMovieDetails ] = useState([]);
+  const [ movieList, setMovieList ] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState();
   const movieService = new MovieService();
 
-  async function callMovieServiceByTitle(title) {
-    const movies = await movieService.getMoviesByTitle(title);
-    setMovies(movies.Search);
+  const getMoviesByTitle = async (title) => {
+    const movieList = await movieService.getMoviesByTitle(title);
+    setMovieList(movieList.Search);
   }
 
   useEffect(() => {
-    callMovieServiceByTitle('harry potter');
+    getMoviesByTitle('jason bourne');
   }, []);
 
-  async function getMovieById(id) {
-    const movie = await movieService.getMovieById(id);
-    setMovieDetails(movie);
-  }
-
-  const showMovie = (id,index) => {
-    setMovieDetails([]);
-    getMovieById(id);
-    if(index === show) return setShow(null);
-    setShow(index);
-  }
+  const onClose = () => setSelectedMovie(null);
 
   const renderMovieList = () => (
-    movies.map((movie, index) => (
+    movieList.map((movie, index) => (
       <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
-        <div className="d-block mb-4 h-100 text-center text-md-start" onClick={() => showMovie(movie.imdbID,index)}>
-          <img src={movie.Poster} alt={`${movie.Title} poster`} style={{maxWidth:'100%'}} />
+        <div className="d-block mb-4 h-100 text-center text-md-start" onClick={() => setSelectedMovie(movie.imdbID)}>
+          <img src={movie.Poster} alt={`${movie.Title} poster`} style={{width:'300px',maxWidth:'100%'}} />
           <div>
             <p>{ movie.Title }</p>
-            <button onClick={() => showMovie(movie.imdbID,index)}>
-              { index === show ? "Hide Movie" : "Show Movie" }
+            <button onClick={() => setSelectedMovie(movie.imdbID)}>
+              { index === selectedMovie ? "Hide Movie" : "Show Movie" }
             </button>
           </div>
         </div>
-        { show === index && 
-          <MovieModal 
-            onClose={setShow} 
-            show={show} 
+        { selectedMovie && 
+          <MovieModal
+            show={selectedMovie}
+            onClose={onClose}
             children={
-              <MovieDetails 
-                movie={movieDetails} 
+              <MovieDetails
+                id={selectedMovie}
               />
             } 
           />
@@ -56,13 +47,13 @@ export const MovieList = () => {
       </div>
     ))
   );
-    // https://omdbapi.com/?s=star%20wars&apikey=19c7ac68
 
   return(
     <div className="container">
       <h1 className="font-weight-light mt-4 mb-0">Movie List</h1>
+      <Parent />
       <div className="row align-items-center">
-        { movies && renderMovieList() }
+        { movieList && renderMovieList() }
       </div>
     </div>
   )
