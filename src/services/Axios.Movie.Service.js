@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const apiKey = '19c7ac68';
 
-export default class MovieService {
+export default class AxiosMovieService {
 
-  getMoviesByTitle(title){
-    return axios.get(`https://www.omdbapi.com/?s=${title}&apikey=${apiKey}`)
+  getMoviesByTitle(title,type){
+    return axios.get(`https://www.omdbapi.com/?s=${title}&type=${type}&apikey=${apiKey}`)
     .then((res) => res.data)
     .catch((err) => console.error(err));
   }
