@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MovieDetails from './MovieDetails';
 import MovieModal from './MovieModal';
-// import MovieService from '../services/Movie.Service';
 import MovieService from '../../services/Axios.Movie.Service';
-import LogFormData from '../Forms/LogFormData';
+import LogFormData from '../Email/LogFormData';
 
 const MovieList = () => {
   const [ movieList, setMovieList ] = useState([]);
