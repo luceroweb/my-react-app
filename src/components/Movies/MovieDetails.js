@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MovieService from '../services/Axios.Movie.Service';
+import MovieService from '../../services/Axios.Movie.Service';
 
 // Class based components
 const MovieDetails = ({ id }) => {

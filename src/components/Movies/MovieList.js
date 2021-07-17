@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MovieDetails from './MovieDetails';
 import MovieModal from './MovieModal';
 // import MovieService from '../services/Movie.Service';
-import MovieService from '../services/Axios.Movie.Service';
-import { Parent } from './Parent';
+import MovieService from '../../services/Axios.Movie.Service';
+import LogFormData from '../Forms/LogFormData';
 
-export const MovieList = () => {
+const MovieList = () => {
   const [ movieList, setMovieList ] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState();
   const movieService = new MovieService();
@@ -51,10 +51,12 @@ export const MovieList = () => {
   return(
     <div className="container">
       <h1 className="font-weight-light mt-4 mb-0">Movie List</h1>
-      <Parent />
+      <LogFormData />
       <div className="row align-items-center">
         { movieList && renderMovieList() }
       </div>
     </div>
   )
 }
+
+export default MovieList;

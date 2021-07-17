@@ -1,7 +1,7 @@
-import { Form } from './Form';
-import { EmailService } from '../services/email.service';
+import { Form } from './EmailForm';
+import { EmailService } from '../../services/email.service';
 
-export const Parent = () => {
+const LogFormData = () => {
   const emailService = new EmailService();
 
   const logFormData = (data) => {
@@ -14,3 +14,5 @@ export const Parent = () => {
     </div>
   );
 }
+
+export default LogFormData;
