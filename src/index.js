@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MovieList from './components/Movies/MovieList';
+import ShowList from './components/Shows/ShowList';
                          
 ReactDOM.render(
-  <MovieList />,
+  <ShowList />,
   document.getElementById('root')
 );

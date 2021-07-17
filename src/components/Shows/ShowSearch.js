@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // Class based components
-const MovieSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
+const ShowSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
   const [ formData, setFormData ] = useState(
     {
       titleSearchTerm: '',
@@ -12,7 +12,7 @@ const MovieSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     setTitleSearchTerm(formData.titleSearchTerm);
-    setTitleSearchType(formData.titleSearchType);
+    setTitleSearchType(formData.titleSearchType || 'movie');
   }
 
   const onInputChange = (e) => {
@@ -59,4 +59,4 @@ const MovieSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
   );
 }
 
-export default MovieSearch;
+export default ShowSearch;
