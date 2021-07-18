@@ -19,7 +19,7 @@ const ShowCards = ({ showList }) => {
             </div>
             :
             <div className="card-img-top" style={{width:'100%',maxHeight:'150%',background:'grey no-repeat center',overflow:'hidden'}}>
-              <img src={show.Poster} alt={`${show.Title} poster`} style={{maxWidth:'100%'}} />
+              <img src={show.Poster} alt={`${show.Title} poster`} style={{width:'100%'}} />
             </div>
           }
           

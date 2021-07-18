@@ -14,9 +14,9 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
 
   const previous = () => {
     return ((selectedPage + 1) > 1) ? 
-      <li className="page-item" key="previous"><button className="page-link" tabIndex="-1" onClick={() => setSelectedPage(selectedPage - 1)}>Previous</button></li>
+      <li className="page-item" key="previous"><button className="page-link" tabIndex="-1" onClick={() => setSelectedPage(selectedPage - 1)}>&lt;</button></li>
     : 
-      <li className="page-item disabled" key="previous"><button className="page-link" tabIndex="-1">Previous</button></li>
+      <li className="page-item disabled" key="previous"><button className="page-link" tabIndex="-1">&lt;</button></li>
     ;
   }
 
@@ -36,9 +36,9 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
 
   const next = () => {
     return (selectedPage < (pageCount -1)) ? 
-      <li className="page-item" key="Next"><button className="page-link" onClick={() => setSelectedPage(selectedPage + 1)}>Next</button></li>
+      <li className="page-item" key="Next"><button className="page-link" onClick={() => setSelectedPage(selectedPage + 1)}>&gt;</button></li>
     : 
-      <li className="page-item disabled" key="Next"><button className="page-link">Next</button></li>
+      <li className="page-item disabled" key="Next"><button className="page-link">&gt;</button></li>
     ;
   }
 

@@ -42,7 +42,7 @@ const ShowSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
             name="titleSearchType"
             className="form-select d-inline"
             placeholder="Type"
-            vlaue={formData.titleSearchType}
+            value={formData.titleSearchType}
             required
             onChange={(e) => onInputChange(e)}
             style={{width:'7em',marginRight:'8px'}}
