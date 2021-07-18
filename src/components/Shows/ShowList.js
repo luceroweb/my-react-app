@@ -32,7 +32,6 @@ const ShowList = () => {
         { showList &&
           <ShowCards showList={showList} />
         }
-        <Pagination totalResults={totalResults} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
         { !titleSearchTerm &&
           <p className="text-center">search for a show above</p>
         }
@@ -41,6 +40,7 @@ const ShowList = () => {
           Please try again.</p>
         }
       </div>
+      <Pagination totalResults={totalResults} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
     </div>
   )
 }

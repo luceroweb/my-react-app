@@ -51,15 +51,19 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
   }
 
   return pageCount > 1 ? (
-    <nav className="text-center" aria-label="Page navigation">
-      <ul className="pagination">
-        { firstPage() }
-        { previous() }
-        { pages() }
-        { next() }
-        { lastPage() }
-      </ul>
-    </nav>
+    <div className="row">
+      <div className="col text-center">
+        <nav className="text-center d-inline-block" aria-label="Page navigation">
+          <ul className="pagination">
+            { firstPage() }
+            { previous() }
+            { pages() }
+            { next() }
+            { lastPage() }
+          </ul>
+        </nav>
+      </div>
+    </div>
   ): null;
 }
 
