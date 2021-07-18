@@ -38,7 +38,6 @@ const ShowSearch = ({ setTitleSearchTerm, setTitleSearchType }) => {
             value={formData.titleSearchTerm}
           />
           <select
-            type="text"
             name="titleSearchType"
             className="form-select d-inline"
             placeholder="Type"
