@@ -28,7 +28,7 @@ const ShowDetails = ({ id }) => {
         }
       </div>
       <div className="col-md-6">
-        <strong className="float-end text-primary h4">{show.imdbRating}</strong>
+        { show.imdbRating !== 'N/A' && <strong className="float-end text-primary h4">{show.imdbRating}</strong> }
         <h4><strong>{show.Title}</strong></h4>
         { show.Rated !== 'N/A' && <span className="badge bg-secondary m-1">{show.Rated}</span> }
         { show.Runtime !== 'N/A' && <span className="badge bg-secondary m-1">{show.Runtime}</span> }

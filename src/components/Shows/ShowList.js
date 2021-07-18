@@ -15,7 +15,7 @@ const ShowList = () => {
     const axiosShowSearch = new AxiosShowSearch();
     const getShowsByTitle = async (title,type,page) => {
       const showList = await axiosShowSearch.getShowsByTitle(title,type,page);
-      setTotalResults(showList.totalResults);
+      setTotalResults(showList?showList.totalResults:0);
       setShowList(showList.Search);
     }
     getShowsByTitle(titleSearchTerm,titleSearchType,selectedPage);
