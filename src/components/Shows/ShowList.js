@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import AxiosShowSearch from '../../services/Axios.Show.Service';
 import ShowSearch from './ShowSearch';
 import ShowCards from './ShowCards';
-import Pagination from '../Pagination';
+import Pagination from '../Pagination/Pagination2';
 
 const ShowList = () => {
   const [ titleSearchTerm, setTitleSearchTerm ] = useState();
   const [ titleSearchType, setTitleSearchType ] = useState();
   const [ showList, setShowList ] = useState([]);
   const [ totalResults, setTotalResults ] = useState(0);
-  const [ selectedPage, setSelectedPage ] = useState(null);
+  const [ currentPage, setCurrentPage ] = useState(1);
 
   useEffect(() => {
     const axiosShowSearch = new AxiosShowSearch();
@@ -18,8 +18,8 @@ const ShowList = () => {
       setTotalResults(showList?showList.totalResults:0);
       setShowList(showList.Search);
     }
-    getShowsByTitle(titleSearchTerm,titleSearchType,selectedPage);
-  }, [titleSearchTerm,titleSearchType,selectedPage]);
+    getShowsByTitle(titleSearchTerm,titleSearchType,currentPage);
+  }, [titleSearchTerm,titleSearchType,currentPage]);
 
   return(
     <div className="container">
@@ -40,7 +40,7 @@ const ShowList = () => {
           Please try again.</p>
         }
       </div>
-      <Pagination totalResults={totalResults} selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
+      <Pagination totalResults={totalResults} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   )
 }
