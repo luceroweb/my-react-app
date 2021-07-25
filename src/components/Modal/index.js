@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({show, onClose, children }) => {          
+const Modal = ({show, onClose, children, buttons }) => {          
 
   return show ? (
     <div className="modal fade show" id="exampleModal" tabIndex="-1" style={{display: 'block'}}>
@@ -13,6 +13,7 @@ const Modal = ({show, onClose, children }) => {
           {children}
           </div>
           <div className="modal-footer">
+            {buttons}
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Close</button>
           </div>
         </div>

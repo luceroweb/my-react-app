@@ -11,8 +11,8 @@ export default class AxiosShowService {
     .catch((err) => console.error(err));
   }
 
-  getShowById(id){
-    return axios.get(`${searchService}?i=${id}&apikey=${apiKey}`)
+  getShowById(imdbID){
+    return axios.get(`${searchService}?i=${imdbID}&apikey=${apiKey}`)
     .then((res) => res.data)
     .catch((err) => console.error(err));
   }

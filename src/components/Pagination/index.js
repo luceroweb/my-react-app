@@ -5,15 +5,15 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
   const pageCount = (totalResults) ? Math.ceil(totalResults / 10) : [];
 
   const firstPage = () => {
-    return ((selectedPage + 1) > 1) ? 
-      <li className="page-item" key="firstPage"><button className="page-link" tabIndex="-1" onClick={() => setSelectedPage(0)}>&lt;&lt;</button></li>
+    return (selectedPage > 1) ? 
+      <li className="page-item" key="firstPage"><button className="page-link" tabIndex="-1" onClick={() => setSelectedPage(1)}>&lt;&lt;</button></li>
     : 
       <li className="page-item disabled" key="firstPage"><button className="page-link" tabIndex="-1">&lt;&lt;</button></li>
     ;
   }
 
   const previous = () => {
-    return ((selectedPage + 1) > 1) ? 
+    return (selectedPage > 1) ? 
       <li className="page-item" key="previous"><button className="page-link" tabIndex="-1" onClick={() => setSelectedPage(selectedPage - 1)}>&lt;</button></li>
     : 
       <li className="page-item disabled" key="previous"><button className="page-link" tabIndex="-1">&lt;</button></li>
@@ -27,7 +27,7 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
         const pagesAfter = (pageCount > 5) ? selectedPage + 2 : pageCount;
         if(index >= pagesBefore && index <= pagesAfter) {
           const pageItemClass = (index === selectedPage) ? 'page-item active' : 'page-item' ;
-          return <li className={pageItemClass} key={index}><button className="page-link" onClick={() => setSelectedPage(index)}>{index+1}</button></li>;
+          return <li className={pageItemClass} key={index}><button className="page-link" onClick={() => setSelectedPage(index+1)}>{index+1}</button></li>;
         }
       }
       return pageNumber(index);
@@ -35,7 +35,7 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
   }
 
   const next = () => {
-    return (selectedPage < (pageCount -1)) ? 
+    return (selectedPage < pageCount) ? 
       <li className="page-item" key="Next"><button className="page-link" onClick={() => setSelectedPage(selectedPage + 1)}>&gt;</button></li>
     : 
       <li className="page-item disabled" key="Next"><button className="page-link">&gt;</button></li>
@@ -43,8 +43,8 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
   }
 
   const lastPage = () => {
-    return (selectedPage < (pageCount -1)) ? 
-      <li className="page-item" key="lastPage"><button className="page-link" onClick={() => setSelectedPage((pageCount -1))}>&gt;&gt;</button></li>
+    return (selectedPage < pageCount) ? 
+      <li className="page-item" key="lastPage"><button className="page-link" onClick={() => setSelectedPage((selectedPage -1))}>&gt;&gt;</button></li>
     : 
       <li className="page-item disabled" key="lastPage"><button className="page-link">&gt;&gt;</button></li>
     ;
@@ -53,15 +53,15 @@ const Pagination = ({ totalResults, selectedPage, setSelectedPage }) => {
   return pageCount > 1 ? (
     <div className="row">
       <div className="col text-center">
-        <nav className="text-center d-inline-block" aria-label="Page navigation">
-          <ul className="pagination">
-            { firstPage() }
-            { previous() }
-            { pages() }
-            { next() }
-            { lastPage() }
-          </ul>
-        </nav>
+          <nav className="text-center d-inline-block" aria-label="Page navigation">
+            <ul className="pagination">
+              { firstPage() }
+              { previous() }
+              { pages() }
+              { next() }
+              { lastPage() }
+            </ul>
+          </nav>
       </div>
     </div>
   ): null;

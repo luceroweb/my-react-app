@@ -1,16 +1,15 @@
 import Navbar from 'react-bootstrap/Navbar';
 import RBNav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
-    <Navbar bg='light'>
+    <Navbar bg='light' className="mb-3">
       <Container>
-        <Navbar.Brand>Show Database Tool</Navbar.Brand>
+        <Navbar.Brand>Show Database</Navbar.Brand>
         <Navbar.Collapse>
-          <RBNav.Link href="/">Show Search</RBNav.Link>
-          <RBNav.Link href="/user-movie-list">My Movie List</RBNav.Link>
+          <RBNav.Link href="/">Search</RBNav.Link>
+          <RBNav.Link href="/user-show-list">My List</RBNav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>

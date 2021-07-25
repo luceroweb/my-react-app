@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import ShowService from '../../services/Axios.Show.Service';
+import PosterUnavailable from '../../images/PosterUnavailable.jpg';
 
-// Class based components
-const ShowDetails = ({ id }) => {
+const ShowDetails = ({ imdbID }) => {
   const [ show, setShow ] = useState();
 
   useEffect(() => {
     const showService = new ShowService();
-    const getShowById = async (id) => {
-      const show = await showService.getShowById(id);
+    const getShowById = async (imdbID) => {
+      const show = await showService.getShowById(imdbID);
       setShow(show);
     }
-    getShowById(id);
-  },[id]);
+    getShowById(imdbID);
+  },[imdbID]);
 
   return show ? (
     <div className="row">
       <div className="col-md-6 text-center">
-        {(show.Poster === 'N/A') ?
-          <div className="d-none d-md-block" style={{position:'relative',width:'100%',paddingBottom:'150%',background:'grey'}}>
-            <div className="position-absolute top-50 start-50 translate-middle text-light">
-              No Poster
-            </div>
-          </div>
-          :
-          <img src={show.Poster} alt={`${show.Title} poster`} style={{maxWidth:'100%'}} />
-        }
+        <img src={(show.Poster === 'N/A') ? PosterUnavailable : show.Poster} alt={`${show.Title} poster`} style={{maxWidth:'100%'}} />
+        {(show.Poster === 'N/A') ? <span className="text-secondary">No poster avaialble</span> : null }
       </div>
       <div className="col-md-6">
         { show.imdbRating !== 'N/A' && <strong className="float-end text-primary h4">{show.imdbRating}</strong> }

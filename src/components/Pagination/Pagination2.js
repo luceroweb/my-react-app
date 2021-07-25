@@ -8,63 +8,18 @@ export const Pagination = ({ totalResults, currentPage, setCurrentPage }) => {
     pageCountArr.push({ count: i+1 })
   }
 
-  // Reduce padding to improve mobile layout
-  const narrowPadding = {paddingLeft:'0.2em',paddingRight:'0.2em'};
-
   // Build pagination options
-  const previous =  [
-    <Button 
-      key="previous" 
-      disabled={currentPage === 1} 
-      onClick={() => setCurrentPage(currentPage - 1)} 
-      style={narrowPadding}
-    >
-      &lt;
-    </Button>
-  ];
+  const startingPages = pageCountArr.slice(0, 2);
 
-  const startingPages = pageCountArr.slice(0, 1);
-
-  const firstThreeDots = (currentPage > 3) ? 
-    [
-    <Button 
-      key="firstThreeDots" 
-      disabled 
-      style={narrowPadding}
-    >
-      ...
-    </Button>
-    ] 
-  : [];
+  const firstThreeDots = (currentPage > 3) ? [<span key="firstThreeDots">...</span>] : [];
 
   const middlePages = (currentPage > 0) ? 
-    pageCountArr.slice(Math.max(currentPage - 2,1), Math.min(currentPage + 1,pageCount - 1)) 
+    pageCountArr.slice(Math.max(currentPage - 1,2), Math.min(currentPage + 1,pageCount - 1)) 
     : [];
 
-  const lastThreeDots = (currentPage < pageCount-2) ? 
-    [
-      <Button 
-        key="lastThreeDots" 
-        disabled 
-        style={narrowPadding}
-      >
-        ...
-      </Button>
-    ] 
-  : [];
+  const lastThreeDots = (currentPage < pageCount-2) ? [<span key="lastThreeDots">...</span>] : [];
 
-  const endingPages = pageCountArr.slice(-1);
-  
-  const next =  [
-    <Button 
-      key="next" 
-      disabled={currentPage === pageCount} 
-      onClick={() => setCurrentPage(currentPage + 1)} 
-      style={narrowPadding}
-    >
-      &gt;
-    </Button>
-  ];
+  const endingPages = pageCountArr.slice(-2);
 
   // Build pagination buttons
   const buildPageList = (arr) => {
@@ -80,28 +35,24 @@ export const Pagination = ({ totalResults, currentPage, setCurrentPage }) => {
   }
 
   let limitedPageCount = [].concat(
-    previous,
     buildPageList(startingPages),
     firstThreeDots,
     buildPageList(middlePages),
     lastThreeDots,
     buildPageList(endingPages),
-    next,
-  );
-
-  let allPageCount = [].concat(
-    previous,
-    buildPageList(pageCountArr),
-    next,
   );
 
   return (
     <div className="text-center">
       { (pageCount > 1) &&
-        <p>Page {currentPage} of {pageCount}</p>
+        <div>
+          <Button key="previous" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>&lt;</Button>
+          <Button disabled>Page {currentPage} of {pageCount}</Button>  
+          <Button key="next" disabled={currentPage === pageCount} onClick={() => setCurrentPage(currentPage + 1)}>&gt;</Button>
+        </div>
       }
       { (pageCount > 1) &&
-        ( pageCount > 7 ? limitedPageCount : allPageCount )
+        ( pageCount > 7 ? limitedPageCount : buildPageList(pageCountArr) )
       }
     </div>
   )
