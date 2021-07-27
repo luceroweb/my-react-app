@@ -1,53 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import UserShowListService from '../../services/userShowList.service';
-import ShowService from '../../services/Axios.Show.Service';
 import ShowCard from '../Shows/ShowCard';
+import BookmarkIcon from '../../images/bookmark.svg';
 
 export const UserShowList = () => {
-  const [selectedImdbID, setSelectedImdbID] = useState();
-  const [userShowImdbIDList, setUserImdbIDList] = useState([]);
-  const [userShowInfo, setUserShowInfo] = useState([]);
+  const [selectedShow, setSelectedShow] = useState();
+  const [showList, setShowList] = useState([]);
+
+  const userShowListService = new UserShowListService();
   
   useEffect(() => {
 
-    const userShowListService = new UserShowListService();
     const getShowList = async () => {
-      const sessionVariableShowList =  await userShowListService.getShowList();
-      setUserImdbIDList(sessionVariableShowList ? sessionVariableShowList.list : []);
+      let sessionVariableShowList =  await userShowListService.getShowList();
+      sessionVariableShowList = sessionVariableShowList ? sessionVariableShowList.list : [];
+      setShowList(sessionVariableShowList);
     };
     getShowList();
 
-  }, [setUserImdbIDList]);
+  }, []);
 
-  const showService = new ShowService();
+  const onClose = () => setSelectedShow(null);
 
-  const myshowlist = [];
-
-  const getShowById = async () => {
-    if(userShowImdbIDList.length) {
-      for(let i=0; i<userShowImdbIDList.length; i++){
-        const show = await showService.getShowById(userShowImdbIDList[i]);
-        myshowlist.push(show);
-      }
-        setUserShowInfo(myshowlist);
-        console.log('done');
-    }
+  const removeShowFromList = async (show) => {
+    await userShowListService.removeShowFromList(show);
   }
-  getShowById();
-  
-  console.log('User Show Info',userShowInfo);
-
-  const buttons = [];
-
-  const onClose = () => setSelectedImdbID(null);
 
   return (
     <div className="container">
       <h1 className=" text-center">User Show List</h1>
       <div className="row align-items-top">
-        { userShowInfo.length ?
-          userShowInfo.map((show, index) => {
-            return <ShowCard show={show} index={index} buttons={buttons} onClose={onClose} selectedImdbID={selectedImdbID} setSelectedImdbID={setSelectedImdbID} key={index} />
+        { showList.length ?
+          showList.map((show, index) => {
+            return <ShowCard 
+              show={show} 
+              index={index} 
+              onClose={onClose} 
+              selectedShow={selectedShow} 
+              setSelectedShow={setSelectedShow} 
+              key={index} 
+              buttons={
+                <button type="button" className="btn btn-secondary" onClick={() => removeShowFromList(show)}>
+                  <img src={BookmarkIcon} alt="" style={{height:'1em',marginRight:'0.5em'}} />
+                  Remove From My Shows
+                </button>
+              } 
+            />
           })
         : <p className=" text-center">You haven't selected any favorite shows yet</p>
         }
